@@ -36,13 +36,31 @@ Kubernetes is used to manage containerized applications efficiently. In this pro
 ##  Architecture Flow
 
 ```
-User / Client
-     ↓
-Ingress / Service
-     ↓
-Microservices (Pods)
-     ↓
-Response to Client
+Developer
+   ↓
+GitHub Repository
+   ↓
+CI/CD Pipeline (GitHub Actions / AWS CodePipeline)
+   ↓
+Build Stage
+   - Install dependencies
+   - Run tests
+   - Docker image build
+   ↓
+Security Scan (Optional)
+   - Trivy (Container image scan)
+   ↓
+Artifact Registry
+   - Docker Hub / Amazon ECR
+   ↓
+Deployment
+   - K8's (Deployment + Service)
+   ↓
+Application Access
+   - Load Balancer / Ingress
+   ↓
+End Users
+
 ```
 
 Each microservice runs inside a Pod, and Kubernetes Services enable communication between them.
